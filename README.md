@@ -29,7 +29,7 @@ Edit the `credentials.js` and set the values.
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
 - `courses`: Where the timetable gets sent
 - `homework`: Where the homework gets sent
-- `pronote`: Might be used in the future to send announcements
+- `other`: Where announcements gets sent
 
 The `etab` table contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
 
