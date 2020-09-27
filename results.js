@@ -18,10 +18,11 @@ async function main()
     for (let eval of evals) {
         for (let e of eval.evaluations) {
             if (e.date > startdate && e.date < enddate) {
+                let levels;
                 if (e.levels == null) {
-                    var levels = "Aucune compétence enregistrée."
+                    levels = "Aucune compétence enregistrée."
                 } else {
-                    var levels = "Compétences :"
+                    levels = "Compétences :"
                     for (let comp of e.levels) {
                         levels = levels+`\n${comp.name} \`${comp.value.short}\``
                     }
