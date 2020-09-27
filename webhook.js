@@ -147,4 +147,28 @@ function pronoteAnnouncement(date, rawDate, title, author, content)
     })
 }
 
-module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement};
+function evalResults(date, rawDate, subject, teacher, name, levels, color)
+{
+    let hcolor = color.substring(1);
+    let dcolor = parseInt(hcolor, 16);
+    axios.post(credentials.webhook.results, {
+        "embeds": [
+            {
+                "title": `${name}`,
+                "description": `${levels}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "color": dcolor,
+                "author": {
+                    "name": `${subject}`
+                },
+                "footer": {
+                    "text": `${teacher}`
+                },
+                "timestamp": `${rawDate}`
+            }
+        ],
+        "username": `Nouvelle compétence`,
+        "avatar_url": "https://api.amiiya.fr/api/img/school.png"
+    })
+}
+
+module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults };

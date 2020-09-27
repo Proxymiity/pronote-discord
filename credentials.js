@@ -5,6 +5,7 @@ const password = 'MySecretPassword'
 const webhook = {
     courses: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
     homework: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
+    results: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
     other: 'https://discordapp.com/api/webhooks/0/MySecretWebhook'
 }
 
