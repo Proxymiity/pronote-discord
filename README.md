@@ -29,6 +29,7 @@ Edit the `credentials.js` and set the values.
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
 - `courses`: Where the timetable gets sent
 - `homework`: Where the homework gets sent
+- `results` : Where competences and marks gets sent
 - `other`: Where announcements gets sent
 
 The `etab` table contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
@@ -40,8 +41,10 @@ Edit your crontab with `crontab -e`:
 ```sh
 # Pronote - Announce next courses (each day before courses, 9pm)
 0 21 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/courses.js
-# Pronote - Announce homeworks (each course day, 8pm)
-0 20 * * 1,2,3,4,5 /usr/bin/node /path.to.pronote.dir/homeworks.js
+# Pronote - Announce homeworks (each day before courses, 8pm)
+0 20 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/homeworks.js
+# Pronote - Announce new marks & evals (each day, 8pm)
+0 20 * * * /usr/bin/node /path.to.pronote.dir/results.js
 # Pronote - Announce infos (each day, 9pm)
 0 20 * * * /usr/bin/node /path.to.pronote.dir/infos.js
 ```
