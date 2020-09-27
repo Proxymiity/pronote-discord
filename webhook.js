@@ -101,12 +101,6 @@ function detentionCourse(start, end, rawtime, subject, teacher, room, color)
     })
 }
 
-function announce(message) {
-    axios.post(credentials.webhook.pronote, {
-        "content": `${message}`
-    })
-}
-
 function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description, done, files, color)
 {
     let fnum = files.length
@@ -134,6 +128,23 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
     })
 }
 
+function pronoteAnnouncement(date, rawDate, title, author, content)
+{
+    axios.post(credentials.webhook.other, {
+        "embeds": [
+            {
+                "title": `${title}`,
+                "description": `${content}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "color": 3319890,
+                "author": {
+                    "name": `${author}`
+                },
+                "timestamp": `${rawDate}`
+            }
+        ],
+        "username": `Information de l'établissement`,
+        "avatar_url": "https://api.amiiya.fr/api/img/megaphone.png"
+    })
+}
 
-
-module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, announce, normalHomework };
+module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement};
