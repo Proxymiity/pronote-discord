@@ -101,9 +101,8 @@ function detentionCourse(start, end, rawtime, subject, teacher, room, color)
     })
 }
 
-function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description, done, files, color)
+function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description, done, color)
 {
-    let fnum = files.length
     let day = 24 * 60 * 60 * 1000;
     let tdelta = Math.round(Math.abs((givenfor - givenat) / day));
     let hcolor = color.substring(1);
@@ -112,7 +111,7 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
         "embeds": [
             {
                 "title": `${subject}`,
-                "description": `${description}\n${fnum} fichier(s) attaché(s)\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `${description}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
                 "color": dcolor,
                 "author": {
                     "name": `Donné il y a ${tdelta} jour(s)`

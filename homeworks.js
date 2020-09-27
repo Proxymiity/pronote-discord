@@ -16,7 +16,13 @@ async function main()
     const homeworks = await session.homeworks(startdate, enddate);
 
     for (let work of homeworks) {
-        webhook.normalHomework(work.for, work.givenAt, timeformat.toDateSnowflake(work.for), timeformat.toFullString(work.givenAt), work.subject, work.description, work.done, work.files, work.color)
+        let desc = work.description;
+        if (work.files != null) {
+            for (let file of work.files) {
+                desc = desc + `\n:link: [${file.name}](${file.url})`
+            }
+        }
+        webhook.normalHomework(work.for, work.givenAt, timeformat.toDateSnowflake(work.for), timeformat.toFullString(work.givenAt), work.subject, desc, work.done, work.color)
         await sleep(2500)
     }
 }
