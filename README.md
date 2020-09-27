@@ -38,9 +38,11 @@ The `etab` table contains the school name, the Pronote server ID (or the 'rector
 # Setup
 Edit your crontab with `crontab -e`:
 ```sh
-# Pronote - Announce next courses (each day before courses, 8pm)
+# Pronote - Announce next courses (each day before courses, 9pm)
 0 21 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/courses.js
-# Pronote - Announce homeworks (each course day, 7pm)
+# Pronote - Announce homeworks (each course day, 8pm)
 0 20 * * 1,2,3,4,5 /usr/bin/node /path.to.pronote.dir/homeworks.js
+# Pronote - Announce infos (each day, 9pm)
+0 20 * * * /usr/bin/node /path.to.pronote.dir/infos.js
 ```
 This default configuration will announce courses before each school day at 8pm, and homeworks at 7pm. Values [can be customised here](https://crontab.cronhub.io/).
