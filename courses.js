@@ -16,14 +16,18 @@ async function main()
 
     const timetable = await session.timetable(startdate, enddate)
     for (let course of timetable) {
+        let room = course.room;
+        if (course.room == null) {
+            room = "inconnue"
+        }
         if (course.isDetention === true) {
-            webhook.detentionCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, course.room, course.color)
+            webhook.detentionCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
         } else if (course.isCancelled === true) {
-            webhook.cancelledCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, course.room, course.color)
+            webhook.cancelledCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
         } else if (course.isAway === true) {
-            webhook.awayCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, course.room, course.color)
+            webhook.awayCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
         } else {
-            webhook.normalCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, course.room, course.color)
+            webhook.normalCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
         }
         await sleep(2500)
     }
