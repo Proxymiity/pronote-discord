@@ -2,6 +2,7 @@ const pronote = require('pronote-api')
 const credentials = require('./credentials.js')
 const webhook = require('./webhook.js')
 const timeformat = require('./timeformat.js')
+const storage = require('./storage.js')
 
 async function main()
 {
@@ -23,8 +24,16 @@ async function main()
                     desc = desc+`\n:link: [${file.name}](${file.url})`
                 }
             }
-            webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), info.title, info.author, desc)
-            await sleep(2500)
+            let check = {
+                "date": info.date,
+                "title": info.title,
+                "author": info.author,
+                "desc": desc
+            }
+            if (storage.autoCheck("info", check) === false) {
+                webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), info.title, info.author, desc)
+                await sleep(2500)
+            }
         }
     }
 }
