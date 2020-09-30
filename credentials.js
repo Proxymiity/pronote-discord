@@ -18,4 +18,6 @@ const etab = {
 // UTC to Current Time variation. Europe/Paris = 2 on Summer Time, 1 on Winter Time
 const timediff = 2
 
+const storage = './storage.json'
+
 module.exports = { url, username, password, webhook, etab, timediff };

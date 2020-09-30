@@ -36,6 +36,8 @@ The `etab` table contains the school name, the Pronote server ID (or the 'rector
 
 `timediff`: The time difference between UTC and your school. Must be updated to match current time. [time.is](https://time.is) is a great website for this. If UTC shows 9AM, and your local time 11AM, then the timediff is 2. (it might change in the future, and **change based on the summer time in your country**)
 
+`storage`: This should be set by default. It is the storage file used by the infos & results module
+
 # Setup
 Edit your crontab with `crontab -e`:
 ```sh
@@ -43,9 +45,9 @@ Edit your crontab with `crontab -e`:
 0 21 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/courses.js
 # Pronote - Announce homeworks (each day before courses, 8pm)
 0 20 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/homeworks.js
-# Pronote - Announce new marks & evals (each day, 8pm)
-0 20 * * * /usr/bin/node /path.to.pronote.dir/results.js
-# Pronote - Announce infos (each day, 9pm)
-0 20 * * * /usr/bin/node /path.to.pronote.dir/infos.js
+# Pronote - Check for new marks & evals
+10 * * * * /usr/bin/node /path.to.pronote.dir/results.js
+# Pronote - Check for new infos
+10 * * * * /usr/bin/node /path.to.pronote.dir/infos.js
 ```
 This default configuration will announce courses before each school day at 8pm, and homeworks at 7pm. Values [can be customised here](https://crontab.cronhub.io/).
