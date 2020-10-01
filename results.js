@@ -6,7 +6,7 @@ const storage = require('./storage.js')
 
 async function main()
 {
-    const session = await pronote.login(credentials.url, credentials.username, credentials.password);
+    const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
     const evals = await session.evaluations();
     const marks = await session.marks();
 

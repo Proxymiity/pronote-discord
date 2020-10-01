@@ -22,13 +22,49 @@ The recommended location is `/srv`, but you can place this in whatever folder yo
 Edit the `credentials.js` and set the values.
 
 <details>
+  <summary>CAS list</summary> 
+
+  Académie d'Orleans-Tours (CAS : ac-orleans-tours)  
+  Académie de Besançon (CAS : ac-besancon)  
+  Académie de Bordeaux (CAS : ac-bordeaux)  
+  Académie de Caen (CAS : ac-caen)  
+  Académie de Clermont-Ferrand (CAS : ac-clermont)  
+  Académie de Dijon (CAS : ac-dijon)  
+  Académie de Grenoble (CAS : ac-grenoble)  
+  Académie de Lille (CAS : ac-lille)  
+  Académie de Limoges (CAS : ac-limoges)  
+  Académie de Lyon (CAS : ac-lyon)  
+  Académie de Montpellier (CAS : ac-montpellier)  
+  Académie de Nancy-Metz (CAS : ac-nancy-metz)  
+  Académie de Nantes (CAS : ac-nantes)  
+  Académie de Poitiers (CAS : ac-poitiers)  
+  Académie de Reims (CAS : ac-reims)  
+  Académie de Rouen (Arsene76) (CAS : arsene76)  
+  Académie de Rouen (CAS : ac-rouen)  
+  Académie de Strasbourg (CAS : ac-strasbourg)  
+  Académie de Toulouse (CAS : ac-toulouse)  
+  ENT "Agora 06" (Nice) (CAS : agora06)  
+  ENT "Haute-Garonne" (CAS : haute-garonne)  
+  ENT "Hauts-de-France" (CAS : hdf)  
+  ENT "La Classe" (Lyon) (CAS : laclasse)  
+  ENT "Lycee Connecte" (Nouvelle-Aquitaine) (CAS : lyceeconnecte)  
+  ENT "Seine-et-Marne" (CAS : seine-et-marne)  
+  ENT "Somme" (CAS : somme)  
+  ENT "Toutatice" (Rennes) (CAS : toutatice)  
+  ENT "Île de France" (CAS : iledefrance)  
+  ENT "Lycee Jean Renoir Munich" (CAS : ljr-munich)  
+  ENT "L'eure en Normandie" (CAS : Eure-Normandie)  
+</details>
+
+<details>
   <summary>Credentials configuration</summary> 
 
 
-`url`: Your Pronote Server URL. You must have access to the direct login interface.  
+`url`: Your Pronote Server URL.
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
 `username`: Your Pronote username.  
 `password`: Your Pronote password.
+`cas`: Your CAS (if needed). See the CAS list, and replace `null` with `'cas'`.
 
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
 - `courses`: Where the timetable gets sent
@@ -53,6 +89,7 @@ If it doesn't work because of your system timezone or something else, you can st
 const url = 'https://1234567X.index-education.net/pronote/eleve.html'
 const username = 'USERNAME'
 const password = 'MySecretPassword'
+const cas = null
 
 const webhook = {
     courses: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',

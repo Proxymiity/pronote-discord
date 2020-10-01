@@ -5,7 +5,7 @@ const timeformat = require('./timeformat.js')
 
 async function main()
 {
-    const session = await pronote.login(credentials.url, credentials.username, credentials.password);
+    const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
     const today = new Date()
     const startdate = new Date(today)
     startdate.setDate(startdate.getDate() + 1)

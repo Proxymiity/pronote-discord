@@ -58,7 +58,7 @@ async function main() {
     console.log("Credentials verification complete")
     console.log("Attempting to communicate with Pronote... [Testing session]")
 
-    const setupSession = await pronote.login(credentials.url, credentials.username, credentials.password)
+    const setupSession = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)
     console.log(`Logged in as ${setupSession.user.name} (id ${setupSession.user.id}).`)
     if (setupSession.user.studentClass === undefined || setupSession.user.studentClass.name == null) {
         console.log("pronote: There is no class associated with this account")
@@ -67,7 +67,7 @@ async function main() {
     console.log(`Class: ${setupSession.user.studentClass.name}`)
 
     console.log("Attempting to communicate with Pronote... [Testing keepAlive]")
-    console.log((await pronote.login(credentials.url, credentials.username, credentials.password)).keepAlive())
+    console.log((await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)).keepAlive())
 
     console.log("Setting up storage...")
     await storageSetup()
@@ -83,7 +83,7 @@ async function storageSetup() {
     const pronote = require('pronote-api')
     const credentials = require('./credentials.js')
     const storage = require('./storage.js')
-    let session = await pronote.login(credentials.url, credentials.username, credentials.password)
+    let session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)
     let infos = await session.infos()
     let evals = await session.evaluations()
     let marks = await session.marks();
