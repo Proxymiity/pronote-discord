@@ -21,7 +21,10 @@ The recommended location is `/srv`, but you can place this in whatever folder yo
 # Config
 Edit the `credentials.js` and set the values.
 
-`url`: Your Pronote Server URL. Currently, you must have access to the direct login interface.  
+<details>
+  <summary>Credentials configuration</summary> 
+
+`url`: Your Pronote Server URL. You must have access to the direct login interface.  
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
 `username`: Your Pronote username.  
 `password`: Your Pronote password.
@@ -38,6 +41,45 @@ The `etab` table contains the school name, the Pronote server ID (or the 'rector
 If it doesn't work because of your system timezone or something else, you can still remove the `getTimediff()` and replace it with your Time Difference. *If UTC shows 9AM, and your local time 11AM, then the timediff is 2. This value change based on the summer time in your country*
 
 `storage`: This should be set by default. It is the storage file used by the infos & results module
+</details>
+
+<details>
+  <summary>Credentials example</summary> 
+📁 `credentials.js`
+
+```javascript
+
+const url = 'https://1234567X.index-education.net/pronote/eleve.html'
+const username = 'USERNAME'
+const password = 'MySecretPassword'
+
+const webhook = {
+    courses: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
+    homework: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
+    results: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
+    other: 'https://discordapp.com/api/webhooks/0/MySecretWebhook'
+}
+
+const etab = {
+    name: 'Lycée XXX',
+    id: '1234567X',
+    publicurl: 'https://1234567X.index-education.net/pronote/'
+}
+
+// Replace getTimediff() with your own Time difference (see README)
+// or leave it to get it automatically.
+const timediff = getTimediff()
+function getTimediff() {
+    let utc = new Date()
+    return offset = -utc.getTimezoneOffset()/60
+}
+
+const storage = './storage.json'
+
+module.exports = { url, username, password, webhook, etab, timediff };
+
+```
+</details>
 
 # Setup
 Edit your crontab with `crontab -e`:
