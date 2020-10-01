@@ -1,6 +1,7 @@
 const url = ''
 const username = ''
 const password = ''
+const cas = null
 
 const webhook = {
     courses: '',
