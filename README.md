@@ -3,12 +3,6 @@ Broadcast courses from the standard French-school-timetable thing. (in French.)
 
 ****
 
-# Please read
-This project is under development and configuration files (like `credentials.js`) might change at every moment. If you install my useless thing and want to update it, please backup your config file, and update every file.  
-If you want to improve this project, feel free to do so.
-
-****
-
 # Requirements
 You need a VPS or a Linux-based server that can run NodeJS 14.
 Debian 9 is a great OS choice.  
