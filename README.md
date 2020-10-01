@@ -64,7 +64,7 @@ Edit the `credentials.js` and set the values.
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
 `username`: Your Pronote username.  
 `password`: Your Pronote password.
-`cas`: Your CAS (if needed). See the CAS list, and replace `null` with `'cas'`.
+`cas`: Your CAS (if needed). See the CAS list, and replace `'none'` with `'cas'`.
 
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
 - `courses`: Where the timetable gets sent
@@ -89,7 +89,7 @@ If it doesn't work because of your system timezone or something else, you can st
 const url = 'https://1234567X.index-education.net/pronote/eleve.html'
 const username = 'USERNAME'
 const password = 'MySecretPassword'
-const cas = null
+const cas = 'none'
 
 const webhook = {
     courses: 'https://discordapp.com/api/webhooks/0/MySecretWebhook',
