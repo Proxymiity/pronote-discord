@@ -45,7 +45,7 @@ If it doesn't work because of your system timezone or something else, you can st
 
 <details>
   <summary>Credentials example</summary> 
-📁 `credentials.js`
+📁 credentials.js
 
 ```javascript
 
@@ -82,6 +82,7 @@ module.exports = { url, username, password, webhook, etab, timediff };
 </details>
 
 # Setup
+Run `setup.js` with `node ./setup.js` to verify configuration
 Edit your crontab with `crontab -e`:
 ```sh
 # Pronote - Announce next courses (each day before courses, 9pm)
