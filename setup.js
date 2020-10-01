@@ -46,7 +46,7 @@ async function main() {
         console.log("./credentials:js: etab.publicurl not set")
         process.exit(-1)
     }
-    if (credentials.timediff === '') {
+    if (credentials.timediff == null) {
         console.log("./credentials:js: timediff not set")
         process.exit(-1)
     }
@@ -72,6 +72,10 @@ async function main() {
     console.log("Setting up storage...")
     await storageSetup()
     console.log("Storage set up.")
+    console.log("")
+    console.log(`You will be logged in as ${setupSession.user.name}.`)
+    console.log(`The time difference between UTC and local timezone is ${credentials.timediff}. If this is not correct, please see the documentation.`)
+    console.log("")
     console.log("Setup complete. Please finish reading the documentation here: https://github.com/Proxymiity/pronote-discord#setup")
 }
 
