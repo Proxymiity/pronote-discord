@@ -15,8 +15,13 @@ const etab = {
     publicurl: 'https://1234567X.index-education.net/pronote/'
 }
 
-// UTC to Current Time variation. Europe/Paris = 2 on Summer Time, 1 on Winter Time
-const timediff = 2
+// Replace getTimediff() with your own Time difference (see README)
+// or leave it to get it automatically.
+const timediff = getTimediff()
+function getTimediff() {
+    let utc = new Date()
+    return offset = -utc.getTimezoneOffset()/60
+}
 
 const storage = './storage.json'
 

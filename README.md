@@ -34,7 +34,8 @@ All the values under `webhook` (courses, homework, pronote) are the Discord Webh
 
 The `etab` table contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
 
-`timediff`: The time difference between UTC and your school. Must be updated to match current time. [time.is](https://time.is) is a great website for this. If UTC shows 9AM, and your local time 11AM, then the timediff is 2. (it might change in the future, and **change based on the summer time in your country**)
+`timediff`: By default it is now set automatically according to the difference between local timezone and UTC.
+If it doesn't work because of your system timezone or something else, you can still remove the `getTimediff()` and replace it with your Time Difference. *If UTC shows 9AM, and your local time 11AM, then the timediff is 2. This value change based on the summer time in your country*
 
 `storage`: This should be set by default. It is the storage file used by the infos & results module
 
