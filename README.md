@@ -24,6 +24,7 @@ Edit the `credentials.js` and set the values.
 <details>
   <summary>Credentials configuration</summary> 
 
+
 `url`: Your Pronote Server URL. You must have access to the direct login interface.  
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
 `username`: Your Pronote username.  
@@ -45,7 +46,7 @@ If it doesn't work because of your system timezone or something else, you can st
 
 <details>
   <summary>Credentials example</summary> 
-📁 `credentials.js`
+📁 credentials.js
 
 ```javascript
 
