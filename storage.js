@@ -45,15 +45,17 @@ function autoCheck(name, data) {
 
 function checkStorageFile() {
     if (fs.existsSync(storage) === false) {
-        let c = {}
-        let content = JSON.stringify(c)
-        fs.writeFileSync(storage, content)
+        resetStorageFile()
     }
     if (fs.readFileSync(storage, 'utf8') === "") {
-        let c = {}
-        let content = JSON.stringify(c)
-        fs.writeFileSync(storage, content)
+        resetStorageFile()
     }
 }
 
-module.exports = { read, write, store, compare, autoCheck }
+function resetStorageFile() {
+    let c = {}
+    let content = JSON.stringify(c)
+    fs.writeFileSync(storage, content)
+}
+
+module.exports = { read, write, store, compare, autoCheck, resetStorageFile, checkStorageFile }
