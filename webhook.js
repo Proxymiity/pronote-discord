@@ -194,4 +194,23 @@ function markResults(date, rawDate, subject, name, marks, averages, color)
     })
 }
 
-module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults };
+function installed(setup, version)
+{
+    axios.post(credentials.webhook.other, {
+        "embeds": [
+            {
+                "title": "`pronote-discord`",
+                "description": `La configuration de [pronote-discord](https://github.com/Proxymiity/pronote-discord) a été initialisée avec succès !\nVersion du setup : \`${setup}\`\nVersion des scripts : \`${version}\`\nChangelog : [latest](https://github.com/Proxymiity/pronote-discord/releases/latest)`,
+                "color": 6094592,
+                "author": {
+                    "name": "Proxymiity",
+                    "icon_url": "https://api.amiiya.fr/api/pimg/github.png"
+                }
+            }
+        ],
+        "username": "Setup",
+        "avatar_url": "https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+    })
+}
+
+module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed };

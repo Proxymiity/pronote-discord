@@ -1,9 +1,15 @@
+const setup = {
+    sver: "0.1.1",
+    ver: "v1.1"
+}
+
 async function main() {
     console.log("Setting up pronote-discord - importing modules...")
 
     const pronote = require('pronote-api')
     const credentials = require('./credentials.js')
     const store = require('./storage.js')
+    const hook = require('./webhook.js')
 
     console.log("Initializing new storageFile...")
     store.resetStorageFile()
@@ -81,6 +87,7 @@ async function main() {
     console.log(`The time difference between UTC and local timezone is ${credentials.timediff}. If this is not correct, please see the documentation.`)
     console.log("")
     console.log("Setup complete. Please finish reading the documentation here: https://github.com/Proxymiity/pronote-discord#setup")
+    hook.installed(setup.sver, setup.ver)
 }
 
 async function storageSetup() {
