@@ -3,6 +3,10 @@ async function main() {
 
     const pronote = require('pronote-api')
     const credentials = require('./credentials.js')
+    const store = require('./storage.js')
+
+    console.log("Initializing new storageFile...")
+    store.resetStorageFile()
 
     console.log("Verifying credentials...")
 
