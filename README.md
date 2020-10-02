@@ -122,8 +122,8 @@ Edit your crontab with `crontab -e`:
 # Pronote - Announce homeworks (each day before courses, 8pm)
 0 20 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/homeworks.js
 # Pronote - Check for new marks & evals
-10 * * * * /usr/bin/node /path.to.pronote.dir/results.js
+*/10 * * * * /usr/bin/node /path.to.pronote.dir/results.js
 # Pronote - Check for new infos
-10 * * * * /usr/bin/node /path.to.pronote.dir/infos.js
+*/10 * * * * /usr/bin/node /path.to.pronote.dir/infos.js
 ```
 This default configuration will announce courses before each school day at 8pm, and homeworks at 7pm. Values [can be customised here](https://crontab.cronhub.io/).
