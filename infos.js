@@ -17,23 +17,21 @@ async function main()
     const infos = await session.infos();
 
     for (let info of infos) {
-        if (info.date > startdate && info.date < enddate) {
-            let desc = info.content
-            if (info.files != null) {
-                for (let file of info.files) {
-                    desc = desc+`\n:link: [${file.name}](${file.url})`
-                }
+        let desc = info.content
+        if (info.files != null) {
+            for (let file of info.files) {
+                desc = desc + `\n:link: [${file.name}](${file.url})`
             }
-            let check = {
-                "date": info.date,
-                "title": info.title,
-                "author": info.author,
-                "desc": desc
-            }
-            if (storage.autoCheck("info", check) === false) {
-                webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), info.title, info.author, desc)
-                await sleep(2500)
-            }
+        }
+        let check = {
+            "date": info.date,
+            "title": info.title,
+            "author": info.author,
+            "desc": info.content
+        }
+        if (storage.autoCheck("info", check) === false) {
+            webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), info.title, info.author, desc)
+            await sleep(2500)
         }
     }
 }

@@ -98,7 +98,7 @@ async function storageSetup() {
             "date": info.date,
             "title": info.title,
             "author": info.author,
-            "desc": desc
+            "desc": info.content
         }
         storage.store("info", check)
         console.log(check)
