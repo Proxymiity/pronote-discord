@@ -17,6 +17,10 @@ async function main()
     const infos = await session.infos();
 
     for (let info of infos) {
+        let title = info.title
+        if (info.title === undefined) {
+            title = "*Sans titre*"
+        }
         let desc = info.content
         if (info.files != null) {
             for (let file of info.files) {
@@ -25,12 +29,12 @@ async function main()
         }
         let check = {
             "date": info.date,
-            "title": info.title,
+            "title": title,
             "author": info.author,
             "desc": info.content
         }
         if (storage.autoCheck("info", check) === false) {
-            webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), info.title, info.author, desc)
+            webhook.pronoteAnnouncement(info.date, timeformat.toDateSnowflake(info.date), title, info.author, desc)
             await sleep(2500)
         }
     }

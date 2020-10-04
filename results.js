@@ -12,6 +12,10 @@ async function main()
 
     for (let eval of evals) {
         for (let e of eval.evaluations) {
+            let ename = e.name;
+            if (e.name === "") {
+                ename = "*Sans titre*"
+            }
             let levels;
             if (e.levels == null) {
                 levels = "Aucune compétence enregistrée."
@@ -25,11 +29,11 @@ async function main()
                 "date": e.date,
                 "subject": eval.name,
                 "teacher": eval.teacher,
-                "name": e.name,
+                "name": ename,
                 "levels": levels
             }
             if (storage.autoCheck("eval", check) === false) {
-                webhook.evalResults(e.date, timeformat.toDateSnowflake(e.date), eval.name, eval.teacher, e.name, levels, eval.color)
+                webhook.evalResults(e.date, timeformat.toDateSnowflake(e.date), eval.name, eval.teacher, ename, levels, eval.color)
                 await sleep(2500)
             }
         }

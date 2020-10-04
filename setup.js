@@ -1,6 +1,6 @@
 const setup = {
-    sver: "0.1.1",
-    ver: "v1.1"
+    sver: "0.1.2",
+    ver: "v1.2"
 }
 
 async function main() {
@@ -99,6 +99,10 @@ async function storageSetup() {
     let evals = await session.evaluations()
     let marks = await session.marks();
     for (let info of infos) {
+        let title = info.title
+        if (info.title === undefined) {
+            title = "*Sans titre*"
+        }
         let desc = info.content
         if (info.files != null) {
             for (let file of info.files) {
@@ -107,7 +111,7 @@ async function storageSetup() {
         }
         let check = {
             "date": info.date,
-            "title": info.title,
+            "title": title,
             "author": info.author,
             "desc": info.content
         }
@@ -116,6 +120,10 @@ async function storageSetup() {
     }
     for (let eval of evals) {
         for (let e of eval.evaluations) {
+            let ename = e.name;
+            if (e.name === "") {
+                ename = "*Sans titre*"
+            }
             let levels;
             if (e.levels == null) {
                 levels = "Aucune compétence enregistrée."
@@ -129,7 +137,7 @@ async function storageSetup() {
                 "date": e.date,
                 "subject": eval.name,
                 "teacher": eval.teacher,
-                "name": e.name,
+                "name": ename,
                 "levels": levels
             }
             storage.store("eval", check)
