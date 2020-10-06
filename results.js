@@ -28,7 +28,6 @@ async function main()
             let check = {
                 "date": e.date,
                 "subject": eval.name,
-                "teacher": eval.teacher,
                 "name": ename,
                 "levels": levels
             }

@@ -1,6 +1,6 @@
 const setup = {
-    sver: "0.1.2",
-    ver: "v1.2"
+    sver: "0.1.2b",
+    ver: "v1.2b"
 }
 
 async function main() {
@@ -136,7 +136,6 @@ async function storageSetup() {
             let check = {
                 "date": e.date,
                 "subject": eval.name,
-                "teacher": eval.teacher,
                 "name": ename,
                 "levels": levels
             }
