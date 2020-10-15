@@ -7,13 +7,6 @@ const storage = require('./storage.js')
 async function main()
 {
     const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
-    const today = new Date()
-    const startdate = new Date(today)
-    startdate.setDate(startdate.getDate() -1)
-    startdate.setHours(23-credentials.timediff, 50, 0)
-    const enddate = new Date(today)
-    enddate.setDate(enddate.getDate())
-    enddate.setHours(23-credentials.timediff, 50, 0)
     const infos = await session.infos();
 
     for (let info of infos) {
