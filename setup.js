@@ -1,5 +1,5 @@
 const setup = {
-    sver: "0.1.2b",
+    sver: "0.1.3",
     ver: "v1.2b"
 }
 
