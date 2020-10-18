@@ -22,7 +22,7 @@ function normalCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.amiiya.fr/api/img/greentick.png"
+        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
     })
 }
 
@@ -47,7 +47,7 @@ function awayCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.amiiya.fr/api/img/redtick.png"
+        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
     })
 }
 
@@ -72,7 +72,7 @@ function cancelledCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.amiiya.fr/api/img/orangetick.png"
+        "avatar_url": "https://api.proxymiity.fr/img/orangetick.png"
     })
 }
 
@@ -97,7 +97,7 @@ function detentionCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.amiiya.fr/api/img/orangetick.png"
+        "avatar_url": "https://api.proxymiity.fr/img/orangetick.png"
     })
 }
 
@@ -123,7 +123,7 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
             }
         ],
         "username": `Devoirs pour le ${givenfor.getDate()}/${givenfor.getMonth() + 1}`,
-        "avatar_url": "https://api.amiiya.fr/api/img/homework.png"
+        "avatar_url": "https://api.proxymiity.fr/img/homework.png"
     })
 }
 
@@ -142,7 +142,7 @@ function pronoteAnnouncement(date, rawDate, title, author, content)
             }
         ],
         "username": `Information de l'établissement`,
-        "avatar_url": "https://api.amiiya.fr/api/img/megaphone.png"
+        "avatar_url": "https://api.proxymiity.fr/img/megaphone.png"
     })
 }
 
@@ -166,7 +166,7 @@ function evalResults(date, rawDate, subject, teacher, name, levels, color)
             }
         ],
         "username": `Nouvelle compétence`,
-        "avatar_url": "https://api.amiiya.fr/api/img/school.png"
+        "avatar_url": "https://api.proxymiity.fr/img/school.png"
     })
 }
 
@@ -190,7 +190,7 @@ function markResults(date, rawDate, subject, name, marks, averages, color)
             }
         ],
         "username": `Nouvelle note`,
-        "avatar_url": "https://api.amiiya.fr/api/img/school.png"
+        "avatar_url": "https://api.proxymiity.fr/img/school.png"
     })
 }
 
@@ -204,7 +204,7 @@ function installed(setup, version)
                 "color": 6094592,
                 "author": {
                     "name": "Proxymiity",
-                    "icon_url": "https://api.amiiya.fr/api/pimg/github.png"
+                    "icon_url": "https://api.proxymiity.fr/img/pimg/github.png"
                 }
             }
         ],
