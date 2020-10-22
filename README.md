@@ -13,7 +13,7 @@ Clone this repository using `git clone https://github.com/Proxymiity/github-disc
 The recommended location is `/srv`, but you can place this in whatever folder you want.
 
 # Config
-Edit the `credentials.js` and set the values.
+Edit the `config.json` and set the values.
 
 <details>
   <summary>CAS list</summary> 
