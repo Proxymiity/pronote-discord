@@ -54,11 +54,11 @@ Edit the `credentials.js` and set the values.
   <summary>Config explained</summary> 
 
 The `login` section is where your credentials will go in.  
-`url`: Your Pronote Server URL.  
+- `url`: Your Pronote Server URL.  
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
-`username`: Your Pronote username.  
-`password`: Your Pronote password.  
-`cas`: Your CAS (if needed). See the CAS list, and replace `'none'` with `'your-cas'`.
+- `username`: Your Pronote username.  
+- `password`: Your Pronote password.  
+- `cas`: Your CAS (if needed). See the CAS list, and replace `'none'` with `'your-cas'`.
 
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
 - `courses`: Where the timetable gets sent
@@ -68,12 +68,13 @@ All the values under `webhook` (courses, homework, pronote) are the Discord Webh
 
 The `school` section contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
 
-`timediff`: Leave it to `"default"` to automatically manage the time difference between the local timezone and the UTC time.  
-If this doesn't work as expected (e.g. you're UTC+2 and it shows 6 because of your system timezone or something else), you can still replace `"default"` with `2` or whatever. *If UTC shows 9AM, and your local time 11AM, then the timediff should be 2. This value change based on the summer time in your country*  
-`storage`: This should be set by default. It is the storage file used by the infos & results module  
-`version`: This should be set by default. It is the version file used by the setup & the update alert  
-`updateAlerts`: Whether or not you want to be notified about updates.  
-`publicMode`: Run the result script in Public Mode: This masks student's personal marks and results, but still shows class average.
+The `settings` section contains other parameters that *should be left to default settings*
+- `timediff`: Leave it to `"default"` to automatically manage the time difference between the local timezone and the UTC time.  
+If this doesn't work as expected (e.g. you're UTC+2 and it shows 6 because of your system timezone or something else), you can still replace `"default"` with `2` or whatever. *If UTC shows 9AM, and your local time 11AM, then the timediff should be 2. This value change based on the summer time in your country*
+- `storage`: This should be set by default. It is the storage file used by the infos & results module
+- `version`: This should be set by default. It is the version file used by the setup & the update alert
+- `updateAlerts`: Whether or not you want to be notified about updates.
+- `publicMode`: Run the result script in Public Mode: This masks student's personal marks and results, but still shows class average.
 </details>
 
 <details>
