@@ -10,7 +10,7 @@ function version() {
 
 function timediff() {
     if (read()['settings']['timediff'] !== "default") {
-        return read()['settings']['timediff']
+        return parseInt(read()['settings']['timediff'])
     } else {
         let utc = new Date()
         return offset = -utc.getTimezoneOffset()/60
