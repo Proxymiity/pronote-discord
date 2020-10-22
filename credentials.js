@@ -32,4 +32,4 @@ function getTimediff() {
 
 const storage = './storage.json'
 
-module.exports = { url, username, password, cas, webhook, etab, timediff, storage };
+module.exports = { ver, updateAlerts, publicMode, url, username, password, cas, webhook, etab, timediff, storage };
