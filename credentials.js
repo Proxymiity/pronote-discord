@@ -1,4 +1,4 @@
-const ver = 'v1.3'
+const ver = 'v1.4'
 // Do not modify the variable above. It is used for the update alert.
 
 const updateAlerts = true
