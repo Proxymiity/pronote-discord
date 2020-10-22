@@ -1,5 +1,5 @@
 const fs = require('fs')
-const storage = require('./credentials.js').storage
+const storage = require('./config.js').read()['settings']['storage']
 
 function read() {
     checkStorageFile()

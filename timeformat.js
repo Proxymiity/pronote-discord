@@ -1,8 +1,8 @@
-const credentials = require('./credentials.js')
+const timediff = require('./config.js').timediff()
 
 function toDateSnowflake(unhandledDate) {
     let date = new Date(unhandledDate)
-    date.setHours(date.getHours() - credentials.timediff);
+    date.setHours(date.getHours() - timediff);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();
@@ -30,7 +30,7 @@ function toDateSnowflake(unhandledDate) {
 
 function toFullString(unhandledDate) {
     let date = new Date(unhandledDate)
-    date.setHours(date.getHours() - credentials.timediff);
+    date.setHours(date.getHours() - timediff);
     let year = date.getFullYear();
     let month = date.getMonth() + 1;
     let day = date.getDate();

@@ -1,74 +1,91 @@
 const setup = {
-    sver: "0.1.4",
-    ver: require('./credentials.js').ver
+    sver: require('./config.js').version()['setup'],
+    ver: require('./config.js').version()['version']
 }
 
 async function main() {
     console.log("Setting up pronote-discord - importing modules...")
 
     const pronote = require('pronote-api')
-    const credentials = require('./credentials.js')
+    const config = require('./config.js').read()
+    const timediff = require('./config.js').timediff()
     const store = require('./storage.js')
     const hook = require('./webhook.js')
 
     console.log("Initializing new storageFile...")
     store.resetStorageFile()
 
-    console.log("Verifying credentials...")
+    console.log("Checking config...")
 
-    if (credentials.url === '') {
-        console.log("./credentials.js: url not set")
+    if (config['login']['url'] === '') {
+        console.log("./config.json: login/url not set")
         process.exit(-1)
     }
-    if (credentials.username === '') {
-        console.log("./credentials:js: username not set")
+    if (config['login']['username'] === '') {
+        console.log("./config.json: login/username not set")
         process.exit(-1)
     }
-    if (credentials.password === '') {
-        console.log("./credentials:js: password not set")
+    if (config['login']['password'] === '') {
+        console.log("./config.json: login/password not set")
         process.exit(-1)
     }
-    if (credentials.webhook.courses === '') {
-        console.log("./credentials:js: webhook.courses not set")
+    if (config['login']['cas'] === '') {
+        console.log("./config.json: login/cas not set")
         process.exit(-1)
     }
-    if (credentials.webhook.homework === '') {
-        console.log("./credentials:js: webhook.homework not set")
+    if (config['webhook']['courses'] === '') {
+        console.log("./config.json: webhook/courses not set")
         process.exit(-1)
     }
-    if (credentials.webhook.results === '') {
-        console.log("./credentials:js: webhook.results not set")
+    if (config['webhook']['homework'] === '') {
+        console.log("./config.json: webhook/homework not set")
         process.exit(-1)
     }
-    if (credentials.webhook.other === '') {
-        console.log("./credentials:js: webhook.other not set")
+    if (config['webhook']['results'] === '') {
+        console.log("./config.json: webhook/results not set")
         process.exit(-1)
     }
-    if (credentials.etab.name === '') {
-        console.log("./credentials:js: etab.name not set")
+    if (config['webhook']['other'] === '') {
+        console.log("./config.json: webhook/other not set")
         process.exit(-1)
     }
-    if (credentials.etab.id === '') {
-        console.log("./credentials:js: etab.id not set")
+    if (config['school']['name'] === '') {
+        console.log("./config.json: school/name not set")
         process.exit(-1)
     }
-    if (credentials.etab.publicurl === '') {
-        console.log("./credentials:js: etab.publicurl not set")
+    if (config['school']['id'] === '') {
+        console.log("./config.json: school/id not set")
         process.exit(-1)
     }
-    if (credentials.timediff == null) {
-        console.log("./credentials:js: timediff not set")
+    if (config['school']['publicurl'] === '') {
+        console.log("./config.json: school/publicurl not set")
         process.exit(-1)
     }
-    if (credentials.storage === '') {
-        console.log("./credentials:js: storage not set")
+    if (config['settings']['timediff'] === '') {
+        console.log("./config.json: settings/timediff not set")
+        process.exit(-1)
+    }
+    if (config['settings']['storage'] === '') {
+        console.log("./config.json: settings/storage not set")
+        process.exit(-1)
+    }
+    if (config['settings']['version'] === '') {
+        console.log("./config.json: settings/version not set")
+        process.exit(-1)
+    }
+    if (config['settings']['updateAlerts'] === undefined) {
+        console.log("./config.json: settings/updateAlerts not set")
+        process.exit(-1)
+    }
+    if (config['settings']['publicMode'] === undefined) {
+        console.log("./config.json: settings/publicMode not set")
         process.exit(-1)
     }
 
-    console.log("Credentials verification complete")
+    console.log("Config check complete")
     console.log("Attempting to communicate with Pronote... [Testing session]")
 
-    const setupSession = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)
+    const setupSession = await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas'])
     console.log(`Logged in as ${setupSession.user.name} (id ${setupSession.user.id}).`)
     if (setupSession.user.studentClass === undefined || setupSession.user.studentClass.name == null) {
         console.log("pronote: There is no class associated with this account")
@@ -77,14 +94,14 @@ async function main() {
     console.log(`Class: ${setupSession.user.studentClass.name}`)
 
     console.log("Attempting to communicate with Pronote... [Testing keepAlive]")
-    console.log((await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)).keepAlive())
+    console.log((await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas'])).keepAlive())
 
     console.log("Setting up storage...")
     await storageSetup()
     console.log("Storage set up.")
     console.log("")
     console.log(`You will be logged in as ${setupSession.user.name}.`)
-    console.log(`The time difference between UTC and local timezone is ${credentials.timediff}. If this is not correct, please see the documentation.`)
+    console.log(`The time difference between UTC and local timezone is ${timediff}. If this is not correct, please see the documentation.`)
     console.log("")
     console.log("Setup complete. Please finish reading the documentation here: https://github.com/Proxymiity/pronote-discord#setup")
     hook.installed(setup.sver, setup.ver)
@@ -93,9 +110,9 @@ async function main() {
 
 async function storageSetup() {
     const pronote = require('pronote-api')
-    const credentials = require('./credentials.js')
+    const config = require('./config.js').read()
     const storage = require('./storage.js')
-    let session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas)
+    let session = await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas'])
     let infos = await session.infos()
     let evals = await session.evaluations()
     let marks = await session.marks();

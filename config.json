@@ -1,0 +1,26 @@
+{
+  "login": {
+    "url": "",
+    "username": "",
+    "password": "",
+    "cas": "none"
+  },
+  "webhook": {
+    "courses": "",
+    "homework": "",
+    "results": "",
+    "other": ""
+  },
+  "school": {
+    "name": "",
+    "id": "",
+    "publicurl": ""
+  },
+  "settings": {
+    "timediff": "default",
+    "storage": "./storage.json",
+    "version": "./version.json",
+    "updateAlerts": true,
+    "publicMode": false
+  }
+}

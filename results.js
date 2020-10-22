@@ -1,5 +1,5 @@
 const pronote = require('pronote-api');
-const credentials = require('./credentials.js');
+const config = require('./config.js').read()
 const webhook = require('./webhook.js')
 const timeformat = require('./timeformat.js')
 const storage = require('./storage.js')
@@ -7,7 +7,7 @@ const storage = require('./storage.js')
 async function main()
 {
     await webhook.checkForUpdate()
-    const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
+    const session = await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas']);
     const evals = await session.evaluations();
     const marks = await session.marks();
 
@@ -27,7 +27,7 @@ async function main()
                 storedlevels = levels
                 for (let comp of e.levels) {
                     storedlevels = storedlevels + `\n${comp.name} \`${comp.value.short}\``
-                    if (credentials.publicMode === true) {
+                    if (config['settings']['publicMode'] === true) {
                         levels = levels + `\n${comp.name}`
                     } else {
                         levels = levels + `\n${comp.name} \`${comp.value.short}\``
@@ -66,13 +66,13 @@ async function main()
             }
             let storedmarkDesc = `Note élève \`${value}\\${mark.scale}\` \nMoyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
             let markDesc;
-            if (credentials.publicMode === true) {
+            if (config['settings']['publicMode'] === true) {
                 markDesc = `Moyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
             } else {
                 markDesc = `Note élève \`${value}\\${mark.scale}\` \nMoyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
             }
             let avgDesc;
-            if (credentials.publicMode === true) {
+            if (config['settings']['publicMode'] === true) {
                 avgDesc = `Moy. Classe ${marks.averages.studentClass}`
             } else {
                 avgDesc = `Moy.Gén. ${marks.averages.student} (Classe ${marks.averages.studentClass})`

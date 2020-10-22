@@ -1,13 +1,14 @@
-const credentials = require('./credentials.js');
+const config = require('./config.js').read()
+const version = require('./config.js').version()['version']
 const axios = require('axios');
 
 async function checkForUpdate() {
-    if (credentials.updateAlerts === false) {
+    if (config['settings']['updateAlerts'] === false) {
         return
     }
     const response = await axios.get('https://api.github.com/repos/Proxymiity/pronote-discord/releases/latest')
     let gitVer = response.data['tag_name']
-    let localVer = credentials.ver
+    let localVer = version
     let storage = require('./storage.js')
     if (localVer !== gitVer) {
         let check = {
@@ -25,11 +26,11 @@ function normalCourse(start, end, rawtime, subject, teacher, room, color)
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
     let hours = Math.abs(end - start) / 36e5;
-    axios.post(credentials.webhook.courses, {
+    axios.post(config['webhook']['courses'], {
         "embeds": [
             {
                 "title": `${subject}`,
-                "description": `Le professeur est marqué comme présent.\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `Le professeur est marqué comme présent.\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Salle ${room}`
@@ -50,11 +51,11 @@ function awayCourse(start, end, rawtime, subject, teacher, room, color)
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
     let hours = Math.abs(end - start) / 36e5;
-    axios.post(credentials.webhook.courses, {
+    axios.post(config['webhook']['courses'], {
         "embeds": [
             {
                 "title": `~~${subject}~~`,
-                "description": `Le professeur est marqué comme **absent** sur Pronote.\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `Le professeur est marqué comme **absent** sur Pronote.\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Salle ${room}`
@@ -75,11 +76,11 @@ function cancelledCourse(start, end, rawtime, subject, teacher, room, color)
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
     let hours = Math.abs(end - start) / 36e5;
-    axios.post(credentials.webhook.courses, {
+    axios.post(config['webhook']['courses'], {
         "embeds": [
             {
                 "title": `~~${subject}~~`,
-                "description": `Le cours est marqué comme **annulé** sur Pronote.\n:warning: *Cette information peut être erronée, dû à un changement d'EDT.*\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `Le cours est marqué comme **annulé** sur Pronote.\n:warning: *Cette information peut être erronée, dû à un changement d'EDT.*\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Salle ${room}`
@@ -100,11 +101,11 @@ function detentionCourse(start, end, rawtime, subject, teacher, room, color)
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
     let hours = Math.abs(end - start) / 36e5;
-    axios.post(credentials.webhook.courses, {
+    axios.post(config['webhook']['courses'], {
         "embeds": [
             {
                 "title": `~~${subject}~~`,
-                "description": `Mesure disciplinaire de l'établissement: Heure de colle.\n:warning: Les sanctions disciplinaires affectent uniquement le compte Pronote lié au bot. (le propriétaire, normalement.)\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `Mesure disciplinaire de l'établissement: Heure de colle.\n:warning: Les sanctions disciplinaires affectent uniquement le compte Pronote lié au bot. (le propriétaire, normalement.)\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Salle ${room}`
@@ -126,11 +127,11 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
     let tdelta = Math.round(Math.abs((givenfor - givenat) / day));
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
-    axios.post(credentials.webhook.homework, {
+    axios.post(config['webhook']['homework'], {
         "embeds": [
             {
                 "title": `${subject}`,
-                "description": `${description}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `${description}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Donné il y a ${tdelta} jour(s)`
@@ -148,11 +149,11 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
 
 function pronoteAnnouncement(date, rawDate, title, author, content)
 {
-    axios.post(credentials.webhook.other, {
+    axios.post(config['webhook']['other'], {
         "embeds": [
             {
                 "title": `${title}`,
-                "description": `${content}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `${content}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": 3319890,
                 "author": {
                     "name": `${author}`
@@ -169,11 +170,11 @@ function evalResults(date, rawDate, subject, teacher, name, levels, color)
 {
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
-    axios.post(credentials.webhook.results, {
+    axios.post(config['webhook']['results'], {
         "embeds": [
             {
                 "title": `${name}`,
-                "description": `${levels}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `${levels}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `${subject}`
@@ -193,11 +194,11 @@ function markResults(date, rawDate, subject, name, marks, averages, color)
 {
     let hcolor = color.substring(1);
     let dcolor = parseInt(hcolor, 16);
-    axios.post(credentials.webhook.results, {
+    axios.post(config['webhook']['results'], {
         "embeds": [
             {
                 "title": `${name}`,
-                "description": `${marks}\n[Cliquez ici pour ouvrir Pronote](${credentials.etab.publicurl})`,
+                "description": `${marks}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `${subject}`
@@ -215,7 +216,7 @@ function markResults(date, rawDate, subject, name, marks, averages, color)
 
 function installed(setup, version)
 {
-    axios.post(credentials.webhook.other, {
+    axios.post(config['webhook']['other'], {
         "embeds": [
             {
                 "title": "`pronote-discord`",
@@ -234,7 +235,7 @@ function installed(setup, version)
 
 function update(localVer, githubVer)
 {
-    axios.post(credentials.webhook.other, {
+    axios.post(config['webhook']['other'], {
         "embeds": [
             {
                 "title": "`pronote-discord`",

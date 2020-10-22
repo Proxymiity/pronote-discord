@@ -1,19 +1,20 @@
 const pronote = require('pronote-api')
-const credentials = require('./credentials.js')
+const config = require('./config.js').read()
+const timediff = require('./config.js').timediff()
 const webhook = require('./webhook.js')
 const timeformat = require('./timeformat.js')
 
 async function main()
 {
     await webhook.checkForUpdate()
-    const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
+    const session = await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas']);
     const today = new Date()
     const startdate = new Date(today)
     startdate.setDate(startdate.getDate())
-    startdate.setHours(23-credentials.timediff, 50, 0)
+    startdate.setHours(23-timediff, 50, 0)
     const enddate = new Date(today)
     enddate.setDate(enddate.getDate() + 1)
-    enddate.setHours(23-credentials.timediff, 50, 0)
+    enddate.setHours(23-timediff, 50, 0)
     const homeworks = await session.homeworks(startdate, enddate);
 
     for (let work of homeworks) {
