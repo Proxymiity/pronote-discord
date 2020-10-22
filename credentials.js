@@ -1,3 +1,9 @@
+const ver = 'v1.3'
+// Do not modify the variable above. It is used for the update alert.
+
+const updateAlerts = true
+const publicMode = false
+
 const url = ''
 const username = ''
 const password = ''

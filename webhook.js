@@ -1,6 +1,25 @@
 const credentials = require('./credentials.js');
 const axios = require('axios');
 
+async function checkForUpdate() {
+    if (credentials.updateAlerts === false) {
+        return
+    }
+    const response = await axios.get('https://api.github.com/repos/Proxymiity/pronote-discord/releases/latest')
+    let gitVer = response.data['tag_name']
+    let localVer = credentials.ver
+    let storage = require('./storage.js')
+    if (localVer !== gitVer) {
+        let check = {
+            "localVer": localVer,
+            "gitVer": gitVer
+        }
+        if (storage.autoCheck("update", check) === false) {
+            update(localVer, gitVer)
+        }
+    }
+}
+
 function normalCourse(start, end, rawtime, subject, teacher, room, color)
 {
     let hcolor = color.substring(1);
@@ -200,11 +219,11 @@ function installed(setup, version)
         "embeds": [
             {
                 "title": "`pronote-discord`",
-                "description": `La configuration de [pronote-discord](https://github.com/Proxymiity/pronote-discord) a été initialisée avec succès !\nVersion du setup : \`${setup}\`\nVersion des scripts : \`${version}\`\nChangelog : [latest](https://github.com/Proxymiity/pronote-discord/releases/latest)`,
+                "description": `La configuration de [pronote-discord](https://github.com/Proxymiity/pronote-discord) a été initialisée avec succès !\nVersion du setup : \`${setup}\`\nVersion des scripts : \`${version}\`\nChangelog : [latest](https://github.com/Proxymiity/pronote-discord/releases/${version})`,
                 "color": 6094592,
                 "author": {
                     "name": "Proxymiity",
-                    "icon_url": "https://api.proxymiity.fr/img/pimg/github.png"
+                    "icon_url": "https://api.proxymiity.fr/profileimg/Proxymiity.png"
                 }
             }
         ],
@@ -213,4 +232,23 @@ function installed(setup, version)
     })
 }
 
-module.exports = { normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed };
+function update(localVer, githubVer)
+{
+    axios.post(credentials.webhook.other, {
+        "embeds": [
+            {
+                "title": "`pronote-discord`",
+                "description": `Une nouvelle version de [pronote-discord](https://github.com/Proxymiity/pronote-discord) est disponible !\nVersion actuelle : \`${localVer}\`\nNouvelle version : \`${githubVer}\`\nChangelog : [latest](https://github.com/Proxymiity/pronote-discord/releases/${githubVer})`,
+                "color": 6094592,
+                "author": {
+                    "name": "Proxymiity",
+                    "icon_url": "https://api.proxymiity.fr/profileimg/Proxymiity.png"
+                }
+            }
+        ],
+        "username": "Mise à jour",
+        "avatar_url": "https://github.githubassets.com/images/modules/logos_page/Octocat.png"
+    })
+}
+
+module.exports = { checkForUpdate, normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed, update };

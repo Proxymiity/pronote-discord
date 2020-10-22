@@ -1,6 +1,6 @@
 const setup = {
-    sver: "0.1.3",
-    ver: "v1.2b"
+    sver: "0.1.4",
+    ver: require('./credentials.js').ver
 }
 
 async function main() {
@@ -88,6 +88,7 @@ async function main() {
     console.log("")
     console.log("Setup complete. Please finish reading the documentation here: https://github.com/Proxymiity/pronote-discord#setup")
     hook.installed(setup.sver, setup.ver)
+    await hook.checkForUpdate()
 }
 
 async function storageSetup() {

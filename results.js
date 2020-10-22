@@ -6,6 +6,7 @@ const storage = require('./storage.js')
 
 async function main()
 {
+    await webhook.checkForUpdate()
     const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
     const evals = await session.evaluations();
     const marks = await session.marks();
@@ -17,19 +18,27 @@ async function main()
                 ename = "*Sans titre*"
             }
             let levels;
+            let storedlevels;
             if (e.levels == null) {
                 levels = "Aucune compétence enregistrée."
+                storedlevels = levels
             } else {
                 levels = "Compétences :"
+                storedlevels = levels
                 for (let comp of e.levels) {
-                    levels = levels + `\n${comp.name} \`${comp.value.short}\``
+                    storedlevels = storedlevels + `\n${comp.name} \`${comp.value.short}\``
+                    if (credentials.publicMode === true) {
+                        levels = levels + `\n${comp.name}`
+                    } else {
+                        levels = levels + `\n${comp.name} \`${comp.value.short}\``
+                    }
                 }
             }
             let check = {
                 "date": e.date,
                 "subject": eval.name,
                 "name": ename,
-                "levels": levels
+                "levels": storedlevels
             }
             if (storage.autoCheck("eval", check) === false) {
                 webhook.evalResults(e.date, timeformat.toDateSnowflake(e.date), eval.name, eval.teacher, ename, levels, eval.color)
@@ -55,13 +64,24 @@ async function main()
             if (mark.max === -1) {
                 max = 0
             }
-            let markDesc = `Note élève \`${value}\\${mark.scale}\` \nMoyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
-            let avgDesc = `Moy.Gén. ${marks.averages.student} (Classe ${marks.averages.studentClass})`
+            let storedmarkDesc = `Note élève \`${value}\\${mark.scale}\` \nMoyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
+            let markDesc;
+            if (credentials.publicMode === true) {
+                markDesc = `Moyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
+            } else {
+                markDesc = `Note élève \`${value}\\${mark.scale}\` \nMoyenne classe \`${mark.average}\\${mark.scale}\` \nMinimum \`${min}\` Maximum \`${max}\` \nCoefficient \`${mark.coefficient}\``
+            }
+            let avgDesc;
+            if (credentials.publicMode === true) {
+                avgDesc = `Moy. Classe ${marks.averages.studentClass}`
+            } else {
+                avgDesc = `Moy.Gén. ${marks.averages.student} (Classe ${marks.averages.studentClass})`
+            }
             let check = {
                 "date": mark.date,
                 "subject": subject.name,
                 "title": title,
-                "mark": markDesc
+                "mark": storedmarkDesc
             }
             if (storage.autoCheck("mark", check) === false) {
                 webhook.markResults(mark.date, timeformat.toDateSnowflake(mark.date), subject.name, title, markDesc, avgDesc, subject.color)

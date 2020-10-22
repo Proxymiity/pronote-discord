@@ -5,6 +5,7 @@ const timeformat = require('./timeformat.js')
 
 async function main()
 {
+    await webhook.checkForUpdate()
     const session = await pronote.login(credentials.url, credentials.username, credentials.password, credentials.cas);
     const today = new Date()
     const startdate = new Date(today)
