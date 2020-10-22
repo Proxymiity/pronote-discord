@@ -53,11 +53,15 @@ Edit the `credentials.js` and set the values.
 <details>
   <summary>Credentials configuration</summary> 
 
+`ver`: This should **NOT** be edited.
+
+`updateAlerts`: Whether or not you want to be notified about updates.  
+`publicMode`: Run the result script in Public Mode: This masks student's personal marks and results, but still shows class average.
 
 `url`: Your Pronote Server URL.
 *You may need to use `?login=true` behind the `/pronote/eleve.html` to access that page, and* **need to use HTTPS.**  
 `username`: Your Pronote username.  
-`password`: Your Pronote password.
+`password`: Your Pronote password.  
 `cas`: Your CAS (if needed). See the CAS list, and replace `'none'` with `'cas'`.
 
 All the values under `webhook` (courses, homework, pronote) are the Discord Webhook URI used to send messages to Discord:  
@@ -68,7 +72,7 @@ All the values under `webhook` (courses, homework, pronote) are the Discord Webh
 
 The `etab` table contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
 
-`timediff`: By default it is now set automatically according to the difference between local timezone and UTC.
+`timediff`: By default it is now set automatically according to the difference between local timezone and UTC.  
 If it doesn't work because of your system timezone or something else, you can still remove the `getTimediff()` and replace it with your Time Difference. *If UTC shows 9AM, and your local time 11AM, then the timediff is 2. This value change based on the summer time in your country*
 
 `storage`: This should be set by default. It is the storage file used by the infos & results module
@@ -79,6 +83,12 @@ If it doesn't work because of your system timezone or something else, you can st
 📁 credentials.js
 
 ```javascript
+
+const ver = 'this variable should be set when cloning the repo and/or downloading releases.'
+// Do not modify the variable above. It is used for the update alert.
+
+const updateAlerts = true
+const publicMode = false
 
 const url = 'https://1234567X.index-education.net/pronote/eleve.html'
 const username = 'USERNAME'
