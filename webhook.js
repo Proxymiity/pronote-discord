@@ -4,9 +4,9 @@ const axios = require('axios');
 
 async function checkForUpdate() {
     if (config['settings']['updateAlerts'] === false) {
-        return
+        return false
     }
-    const response = await axios.get('https://api.github.com/repos/Proxymiity/pronote-discord/releases/latest')
+    const response = await axios.get("https://api.github.com/repos/Proxymiity/pronote-discord/releases/latest")
     let gitVer = response.data['tag_name']
     let localVer = version
     let storage = require('./storage.js')
@@ -17,6 +17,9 @@ async function checkForUpdate() {
         }
         if (storage.autoCheck("update", check) === false) {
             update(localVer, gitVer)
+            return true
+        } else {
+            return false
         }
     }
 }
