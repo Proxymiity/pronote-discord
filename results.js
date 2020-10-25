@@ -6,7 +6,6 @@ const storage = require('./storage.js')
 
 async function main()
 {
-    await webhook.checkForUpdate()
     const session = await pronote.login(config['login']['url'], config['login']['username'], config['login']['password'], config['login']['cas']);
     const evals = await session.evaluations();
     const marks = await session.marks();

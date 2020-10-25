@@ -105,7 +105,7 @@ async function main() {
     console.log("")
     console.log("Setup complete. Please finish reading the documentation here: https://github.com/Proxymiity/pronote-discord#setup")
     hook.installed(setup.sver, setup.ver)
-    await hook.checkForUpdate()
+    await hook.checkForUpdate() // TODO: check and warn user about update before installing
 }
 
 async function storageSetup() {
