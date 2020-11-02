@@ -118,12 +118,12 @@ Run `setup.js` with `node ./setup.js` to verify configuration
 Edit your crontab with `crontab -e`:
 ```sh
 # Pronote - Announce next courses (each day before courses, 9pm)
-0 21 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/courses.js
+0 21 * * 0,1,2,3,4  * * cd /path.to.pronote.dir/ && /usr/bin/node ./courses.js
 # Pronote - Announce homeworks (each day before courses, 8pm)
-0 20 * * 0,1,2,3,4 /usr/bin/node /path.to.pronote.dir/homeworks.js
+0 20 * * 0,1,2,3,4  * * cd /path.to.pronote.dir/ && /usr/bin/node ./homeworks.js
 # Pronote - Check for new marks & evals
-*/10 * * * * cd /path.to.pronote.dir/ && /usr/bin/node /path.to.pronote.dir/results.js
+*/10 * * * * cd /path.to.pronote.dir/ && /usr/bin/node ./results.js
 # Pronote - Check for new infos
-*/10 * * * * cd /path.to.pronote.dir/ && /usr/bin/node /path.to.pronote.dir/infos.js
+*/10 * * * * cd /path.to.pronote.dir/ && /usr/bin/node ./infos.js
 ```
 This default configuration will announce courses before each school day at 8pm, and homeworks at 7pm. Values [can be customised here](https://crontab.cronhub.io/).
