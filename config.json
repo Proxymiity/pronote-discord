@@ -16,6 +16,9 @@
     "id": "",
     "publicurl": ""
   },
+  "courses": {
+    "hideNormalCourses": true
+  },
   "settings": {
     "timediff": "default",
     "storage": "./storage.json",

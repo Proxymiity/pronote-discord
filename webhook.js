@@ -24,6 +24,46 @@ async function checkForUpdate() {
     }
 }
 
+function noAnormalCourses(start, end, rawtime)
+{
+    let hours = Math.abs(end - start) / 36e5;
+    axios.post(config['webhook']['courses'], {
+        "embeds": [
+            {
+                "title": `${config['school']['name']}`,
+                "description": `Aucun professeur absent pour ce jour.\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
+                "color": 3669760,
+                "footer": {
+                    "text": `${hours}H de cours`
+                },
+                "timestamp": `${rawtime}`
+            }
+        ],
+        "username": "Emploi du temps",
+        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
+    })
+}
+
+function containAnormalCourses(start, end, rawtime)
+{
+    let hours = Math.abs(end - start) / 36e5;
+    axios.post(config['webhook']['courses'], {
+        "embeds": [
+            {
+                "title": `${config['school']['name']}`,
+                "description": `L'emploi du temps est modifié.\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
+                "color": 16721408,
+                "footer": {
+                    "text": `${hours}H de cours`
+                },
+                "timestamp": `${rawtime}`
+            }
+        ],
+        "username": `Emploi du temps`,
+        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
+    })
+}
+
 function normalCourse(start, end, rawtime, subject, teacher, room, color)
 {
     let hcolor = color.substring(1);
@@ -255,4 +295,4 @@ function update(localVer, githubVer)
     })
 }
 
-module.exports = { checkForUpdate, normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed, update };
+module.exports = { checkForUpdate, noAnormalCourses, containAnormalCourses, normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed, update };
