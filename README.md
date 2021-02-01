@@ -68,6 +68,8 @@ All the values under `webhook` (courses, homework, pronote) are the Discord Webh
 
 The `school` section contains the school name, the Pronote server ID (or the 'rectorat' ID - usually 7 digits, and 1 letter), and the public URL for Pronote.
 
+The `courses` section contains whether or not certain types of courses should be sent.
+
 The `settings` section contains other parameters that *should be left to default settings*
 - `timediff`: Leave it to `"default"` to automatically manage the time difference between the local timezone and the UTC time.  
 If this doesn't work as expected (e.g. you're UTC+2 and it shows 6 because of your system timezone or something else), you can still replace `"default"` with `2` or whatever. *If UTC shows 9AM, and your local time 11AM, then the timediff should be 2. This value change based on the summer time in your country*
@@ -100,6 +102,9 @@ If this doesn't work as expected (e.g. you're UTC+2 and it shows 6 because of yo
     "name": "Lycée XXX",
     "id": "1234567X",
     "publicurl": "https://1234567X.index-education.net/pronote/"
+  },
+  "courses": {
+    "hideNormalCourses": true
   },
   "settings": {
     "timediff": "default",
