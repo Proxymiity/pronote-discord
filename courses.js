@@ -16,6 +16,7 @@ async function main()
     enddate.setHours(23-timediff, 50, 0)
 
     const timetable = await session.timetable(startdate, enddate)
+    let containAnormalCourses = false
     for (let course of timetable) {
         let room = course.room;
         if (course.room == null) {
@@ -23,14 +24,31 @@ async function main()
         }
         if (course.isDetention === true) {
             webhook.detentionCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
+            containAnormalCourses = true
+            await sleep(2500)
         } else if (course.isCancelled === true) {
             webhook.cancelledCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
+            containAnormalCourses = true
+            await sleep(2500)
         } else if (course.isAway === true) {
             webhook.awayCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
+            containAnormalCourses = true
+            await sleep(2500)
         } else {
-            webhook.normalCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
+            if (config['courses']['hideNormalCourses'] === false) {
+                webhook.normalCourse(course.from, course.to, timeformat.toDateSnowflake(course.from), course.subject, course.teacher, room, course.color)
+                await sleep(2500)
+            }
         }
-        await sleep(2500)
+    }
+    if (config['courses']['hideNormalCourses'] === true) {
+        let startTime = timetable[0].from
+        let endTime = timetable[timetable.length - 1].to
+        if (containAnormalCourses === true) {
+            webhook.containAnormalCourses(startTime, endTime, timeformat.toDateSnowflake(startTime))
+        } else {
+            webhook.noAnormalCourses(startTime, endTime, timeformat.toDateSnowflake(startTime))
+        }
     }
 }
 
