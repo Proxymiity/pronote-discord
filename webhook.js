@@ -24,9 +24,46 @@ async function checkForUpdate() {
     }
 }
 
-function noAnormalCourses(start, end, rawtime)
+function normalCompact(timetable, hours, rawtime)
 {
-    let hours = Math.abs(end - start) / 36e5;
+    axios.post(config['webhook']['courses'], {
+        "embeds": [
+            {
+                "title": "Aucun professeur absent",
+                "description": `${timetable}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
+                "color": 3669760,
+                "footer": {
+                    "text": `${hours}H de cours`
+                },
+                "timestamp": `${rawtime}`
+            }
+        ],
+        "username": "Emploi du temps",
+        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
+    })
+}
+
+function anormalCompact(timetable, hours, rawtime)
+{
+    axios.post(config['webhook']['courses'], {
+        "embeds": [
+            {
+                "title": "Emploi du temps modifié",
+                "description": `${timetable}\n[Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
+                "color": 16721408,
+                "footer": {
+                    "text": `${hours}H de cours`
+                },
+                "timestamp": `${rawtime}`
+            }
+        ],
+        "username": "Emploi du temps",
+        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
+    })
+}
+
+function noAnormalCourses(hours, rawtime)
+{
     axios.post(config['webhook']['courses'], {
         "embeds": [
             {
@@ -44,9 +81,8 @@ function noAnormalCourses(start, end, rawtime)
     })
 }
 
-function containAnormalCourses(start, end, rawtime)
+function containAnormalCourses(hours, rawtime)
 {
-    let hours = Math.abs(end - start) / 36e5;
     axios.post(config['webhook']['courses'], {
         "embeds": [
             {
@@ -123,7 +159,7 @@ function cancelledCourse(start, end, rawtime, subject, teacher, room, color)
         "embeds": [
             {
                 "title": `~~${subject}~~`,
-                "description": `Le cours est marqué comme **annulé** sur Pronote.\n:warning: *Cette information peut être erronée, dû à un changement d'EDT.*\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
+                "description": `Le cours est marqué comme **modifié** sur Pronote.\n:warning: *Cette information peut être erronée, dû à un changement d'EDT.*\n**CONSULTEZ PRONOTE:** [Cliquez ici pour ouvrir Pronote](${config['school']['publicurl']})`,
                 "color": dcolor,
                 "author": {
                     "name": `Salle ${room}`
@@ -295,4 +331,4 @@ function update(localVer, githubVer)
     })
 }
 
-module.exports = { checkForUpdate, noAnormalCourses, containAnormalCourses, normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed, update };
+module.exports = { checkForUpdate, normalCompact, anormalCompact, noAnormalCourses, containAnormalCourses, normalCourse, awayCourse, cancelledCourse, detentionCourse, normalHomework, pronoteAnnouncement, evalResults, markResults, installed, update };

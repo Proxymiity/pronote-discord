@@ -61,6 +61,10 @@ async function main() {
         console.log("./config.json: school/publicurl not set")
         process.exit(-1)
     }
+    if (config['courses']['compactCourses'] === undefined) {
+        console.log("./config.json: courses/compactCourses not set")
+        process.exit(-1)
+    }
     if (config['courses']['hideNormalCourses'] === undefined) {
         console.log("./config.json: courses/hideNormalCourses not set")
         process.exit(-1)

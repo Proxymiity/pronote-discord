@@ -17,6 +17,7 @@
     "publicurl": ""
   },
   "courses": {
+    "compactCourses": true,
     "hideNormalCourses": true
   },
   "settings": {

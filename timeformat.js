@@ -61,4 +61,22 @@ function toFullString(unhandledDate) {
     return strdate;
 }
 
-module.exports = { toDateSnowflake, toFullString };
+function toHMString(unhandledDate) {
+    let date = new Date(unhandledDate)
+    let hour;
+    if (date.getHours() < 10) {
+        hour = `0${date.getHours()}`
+    } else {
+        hour = date.getHours();
+    }
+    let minute;
+    if (date.getMinutes() < 10) {
+        minute = `0${date.getMinutes()}`
+    } else {
+        minute = date.getMinutes();
+    }
+    let strdate = `${hour}:${minute}`
+    return strdate;
+}
+
+module.exports = { toDateSnowflake, toFullString, toHMString };
