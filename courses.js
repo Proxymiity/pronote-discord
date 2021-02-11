@@ -45,9 +45,11 @@ async function main()
         if (config['courses']['hideNormalCourses'] === true) {
             let hours = 0
             for (let course of timetable) {
-                let start = course.from
-                let end = course.to
-                hours =+ Math.abs(end - start) / 36e5;
+                if (course.isAway === true || course.isCancelled === true) {
+                    let start = course.from
+                    let end = course.to
+                    hours += Math.abs(end - start) / 36e5;
+                }
             }
             if (containAnormalCourses === true) {
                 webhook.containAnormalCourses(hours, timeformat.toDateSnowflake(timetable[0].from))
@@ -58,9 +60,11 @@ async function main()
     } else {
         let hours = 0
         for (let course of timetable) {
-            let start = course.from
-            let end = course.to
-            hours += Math.abs(end - start) / 36e5;
+            if (course.isAway === true || course.isCancelled === true) {
+                let start = course.from
+                let end = course.to
+                hours += Math.abs(end - start) / 36e5;
+            }
         }
         let coursesMessage = []
         for (let course of timetable) {
