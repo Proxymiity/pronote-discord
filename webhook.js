@@ -39,7 +39,7 @@ function normalCompact(timetable, hours, rawtime)
             }
         ],
         "username": "Emploi du temps",
-        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/greentick.png"
     })
 }
 
@@ -58,7 +58,7 @@ function anormalCompact(timetable, hours, rawtime)
             }
         ],
         "username": "Emploi du temps",
-        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/redtick.png"
     })
 }
 
@@ -77,7 +77,7 @@ function noAnormalCourses(hours, rawtime)
             }
         ],
         "username": "Emploi du temps",
-        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/greentick.png"
     })
 }
 
@@ -96,7 +96,7 @@ function containAnormalCourses(hours, rawtime)
             }
         ],
         "username": `Emploi du temps`,
-        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/redtick.png"
     })
 }
 
@@ -121,7 +121,7 @@ function normalCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.proxymiity.fr/img/greentick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/greentick.png"
     })
 }
 
@@ -146,7 +146,7 @@ function awayCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.proxymiity.fr/img/redtick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/redtick.png"
     })
 }
 
@@ -171,7 +171,7 @@ function cancelledCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.proxymiity.fr/img/orangetick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/orangetick.png"
     })
 }
 
@@ -196,7 +196,7 @@ function detentionCourse(start, end, rawtime, subject, teacher, room, color)
             }
         ],
         "username": `${teacher}`,
-        "avatar_url": "https://api.proxymiity.fr/img/orangetick.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/orangetick.png"
     })
 }
 
@@ -222,7 +222,7 @@ function normalHomework(givenfor, givenat, rawfor, rawgive, subject, description
             }
         ],
         "username": `Devoirs pour le ${givenfor.getDate()}/${givenfor.getMonth() + 1}`,
-        "avatar_url": "https://api.proxymiity.fr/img/homework.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/homework.png"
     })
 }
 
@@ -241,7 +241,7 @@ function pronoteAnnouncement(date, rawDate, title, author, content)
             }
         ],
         "username": `Information de l'établissement`,
-        "avatar_url": "https://api.proxymiity.fr/img/megaphone.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/megaphone.png"
     })
 }
 
@@ -265,7 +265,7 @@ function evalResults(date, rawDate, subject, teacher, name, levels, color)
             }
         ],
         "username": `Nouvelle compétence`,
-        "avatar_url": "https://api.proxymiity.fr/img/school.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/school.png"
     })
 }
 
@@ -289,7 +289,7 @@ function markResults(date, rawDate, subject, name, marks, averages, color)
             }
         ],
         "username": `Nouvelle note`,
-        "avatar_url": "https://api.proxymiity.fr/img/school.png"
+        "avatar_url": "https://static.ayaya.red/pronote-discord/school.png"
     })
 }
 
